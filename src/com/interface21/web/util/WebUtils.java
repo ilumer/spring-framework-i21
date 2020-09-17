@@ -209,22 +209,22 @@ public abstract class WebUtils {
 	 * containing either a String or a String[] as values
 	 */
 	public static Map getParametersStartingWith(ServletRequest request, String base) {
-		Enumeration enum = request.getParameterNames();
+		Enumeration enumeration = request.getParameterNames();
 		Map params = new HashMap();
 		if (base == null)
 			base = "";
-		while (enum != null && enum.hasMoreElements()) {
-            String paramName = (String) enum.nextElement();
+		while (enumeration != null && enumeration.hasMoreElements()) {
+			String paramName = (String) enumeration.nextElement();
 			if (base == null || "".equals(base) || paramName.startsWith(base)) {
 				String unprefixed = paramName.substring(base.length());
 				String[] values = request.getParameterValues(paramName);
 				if (values == null) {
-                    // do nothing, no values found at all
-                } else if (values.length > 1) {
+					// do nothing, no values found at all
+				} else if (values.length > 1) {
 					params.put(unprefixed, values);
-                } else {
+				} else {
 					params.put(unprefixed, values[0]);
-                }
+				}
 			}
 		}
 		return params;
